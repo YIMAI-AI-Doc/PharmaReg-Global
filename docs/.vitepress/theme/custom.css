@@ -1,0 +1,108 @@
+:root {
+  --vp-nav-height: 60px;
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(90deg, #41d1ff 0%, #bd34fe 100%);
+}
+
+.VPNavBar .VPNavBarTitle .logo {
+  height: 32px;
+  width: auto;
+}
+
+.VPNavBar .VPNavBarTitle .title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* 增强首页 hero 图片渲染效果 (3D 悬浮质感) */
+.VPHomeHero .image-container {
+  position: relative;
+  overflow: visible;
+  margin: 0 auto;
+}
+
+.VPHomeHero .image-container::before {
+  content: "";
+  position: absolute;
+  inset: -12% -14%;
+  border-radius: 36px;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(65, 209, 255, 0.36) 0%, rgba(65, 209, 255, 0) 62%),
+    radial-gradient(circle at 78% 70%, rgba(189, 52, 254, 0.34) 0%, rgba(189, 52, 254, 0) 64%);
+  filter: blur(26px);
+  z-index: 0;
+}
+
+.VPHomeHero .image-bg {
+  width: 216px;
+  height: 216px;
+  background-image: linear-gradient(135deg, #41d1ff 0%, #bd34fe 100%);
+  filter: blur(74px);
+  opacity: 0.32;
+}
+
+.VPHome .VPImage.image-src {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 330px);
+  max-height: 270px;
+  border-radius: 26px;
+  box-shadow:
+    0 22px 44px -12px rgba(65, 209, 255, 0.34),
+    0 18px 32px -10px rgba(189, 52, 254, 0.34),
+    0 46px 90px -26px rgba(16, 24, 40, 0.30);
+  transform: perspective(1000px) rotateY(-6deg) rotateX(2deg);
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+}
+
+.VPHome .VPImage.image-src:hover {
+  transform: perspective(1000px) rotateY(-2deg) rotateX(1deg) scale(1.03);
+  box-shadow:
+    0 28px 58px -14px rgba(65, 209, 255, 0.42),
+    0 24px 46px -14px rgba(189, 52, 254, 0.40),
+    0 58px 110px -28px rgba(16, 24, 40, 0.34);
+}
+
+@media (min-width: 960px) {
+  .VPHomeHero .container {
+    align-items: center;
+  }
+
+  .VPHomeHero .image {
+    flex: 0 0 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 向左偏移布局容器 */
+    margin-left: -15%;
+  }
+
+  .VPHomeHero .image-container {
+    /* 放大并进一步向左平移 */
+    transform: scale(0.87) translateX(-72px);
+    transform-origin: center center;
+  }
+}
+
+@media (max-width: 959px) {
+  .VPHome .VPImage.image-src {
+    max-height: 186px;
+    transform: none;
+  }
+
+  .VPHomeHero .image-container::before {
+    inset: -10% -8%;
+  }
+}
+
+.VPNavBarSearch .search .shortcut,
+.VPNavBarSearch .search kbd,
+.VPNavBarSearch .DocSearch-Button-Keys,
+.VPNavBarSearch .DocSearch-Button-Key {
+  display: none !important;
+}
+
+.VPHome .name {
+  max-width: 16ch;
+  line-height: 1.05;
+}
