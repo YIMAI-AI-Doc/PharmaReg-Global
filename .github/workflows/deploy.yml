@@ -1,0 +1,41 @@
+name: Deploy to GitHub Pages
+
+# 触发条件：main 分支推送代码时自动运行，也支持手动触发
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # 手动触发开关
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # 使用 Ubuntu 系统运行
+    steps:
+      # 1. 拉取仓库代码
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 拉取完整提交记录，避免构建异常
+
+      # 2. 配置 Node.js 环境（和本地版本一致，推荐 20.x）
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm' # 缓存依赖，加速构建
+
+      # 3. 安装项目依赖
+      - name: Install dependencies
+        run: npm install
+
+      # 4. 构建 VitePress 静态资源（生成 dist 文件夹）
+      - name: Build static files
+        run: npm run docs:build
+
+      # 5. 部署到 gh-pages 分支（核心步骤）
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }} # 自动生成的 Token，无需手动配置
+          publish_dir: ./docs/.vitepress/dist # VitePress 构建产物路径（固定）
+          publish_branch: gh-pages # 部署到 gh-pages 分支
+          force_orphan: true # 确保 gh-pages 分支干净，避免冲突
