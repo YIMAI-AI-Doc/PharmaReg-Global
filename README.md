@@ -3,7 +3,7 @@
   PharmaReg Global
 </h1>
 
-面向全球医药注册法规的开放知识库，汇集 NMPA/FDA/EMA/PMDA 等资料与实践要点。
+<p align="center">面向全球医药注册法规的开放知识库，汇集 NMPA/FDA/EMA/PMDA 等资料与实践要点，支持持续共建与快速检索，便于学习与落地。</p>
 
 <p align="center">
   <a href="https://yimai-ai-doc.github.io/PharmaReg-Global/" target="_blank" rel="noopener noreferrer">
@@ -55,4 +55,4 @@ PharmaReg-Global/
 
 ## License
 
-如需开源许可证，请在仓库中补充 `LICENSE` 文件并在此处更新说明。
+本项目采用 CC BY 4.0（Creative Commons Attribution 4.0 International）许可协议，详见 [LICENSE](file:///Users/mzzhang/Documents/eCTD/Github静态网站部署/PharmaReg-Global/LICENSE)。
