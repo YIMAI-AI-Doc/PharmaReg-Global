@@ -166,5 +166,55 @@ export default defineConfig({
     search: {
       provider: 'local'
     }
-  }
+  },
+  // 其它配置
+  head: [
+    // 百度统计代码
+    [
+      'script',
+      {},
+      `var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?924672c8eecc594f470079d3e76f0396"; // 替换为你的ID
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();`
+    ],
+    // 单页应用路由跟踪（关键！VitePress需要这个）
+    [
+      'script',
+      {},
+      `(function() {
+        function getPath() {
+          return location.pathname + location.search + location.hash;
+        }
+
+        var last = getPath();
+        function track() {
+          if (!window._hmt || !window._hmt.push) return;
+          var p = getPath();
+          if (p === last) return;
+          last = p;
+          window._hmt.push(['_trackPageview', p]);
+        }
+
+        var pushState = history.pushState;
+        history.pushState = function() {
+          var ret = pushState.apply(this, arguments);
+          track();
+          return ret;
+        };
+
+        var replaceState = history.replaceState;
+        history.replaceState = function() {
+          var ret = replaceState.apply(this, arguments);
+          track();
+          return ret;
+        };
+
+        window.addEventListener('popstate', track);
+      })();`
+    ]
+  ]
 })
