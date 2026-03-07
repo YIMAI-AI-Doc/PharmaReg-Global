@@ -106,3 +106,36 @@
   max-width: 16ch;
   line-height: 1.05;
 }
+
+.VPNavBar .content-body > .search {
+  order: 1;
+}
+
+.VPNavBar .content-body > .menu {
+  order: 2;
+}
+
+.VPNavBar .content-body > .nav-btn-lang {
+  order: 3;
+}
+
+.VPNavBar .content-body > .translations {
+  order: 7;
+  display: none !important;
+}
+
+.VPNavBar .content-body > .appearance {
+  order: 4;
+}
+
+.VPNavBar .content-body > .social-links {
+  order: 5;
+}
+
+.VPNavBar .content-body > .extra {
+  order: 6;
+}
+
+.VPNavBar .content-body > .hamburger {
+  order: 8;
+}
