@@ -210,17 +210,24 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         body: JSON.stringify({ question })
       })
 
-      const data = await response.json().catch(() => null)
-      if (data && data.code === 200) {
-        renderMarkdown(data.answer)
-      } else if (data) {
-        output.textContent = `出错了：${data.answer ?? '未知错误'}`
+      // ✅ 核心修正1：先判断HTTP响应是否成功（response.ok 对应 statusCode 200）
+      if (response.ok) {
+        const data = await response.json().catch(() => null)
+        // ✅ 核心修正2：判断是否有answer字段，有则正常渲染，无则提示空回答
+        if (data && data.answer) {
+          renderMarkdown(data.answer)
+        } else {
+          output.textContent = '未获取到回答，请换个问题试试！'
+        }
       } else {
-        output.textContent = '服务返回异常，请稍后再试！'
+        // ✅ 核心修正3：HTTP状态码非200时，解析错误信息
+        const errorData = await response.json().catch(() => null)
+        output.textContent = `出错了：${errorData?.error ?? `请求失败（状态码：${response.status}）`}`
       }
     } catch (error) {
+      // ✅ 核心修正4：仅网络错误时提示
       console.error('请求失败：', error)
-      output.textContent = '网络错误，请稍后再试！'
+      output.textContent = '网络错误，请检查网络或稍后再试！'
     } finally {
       setLoading(false)
     }
