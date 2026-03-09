@@ -1,6 +1,5 @@
 ---
 layout: home
-
 hero:
   name: PharmaReg Global Docs
   text: 全球药品注册法规知识库
@@ -14,7 +13,6 @@ hero:
     - theme: alt
       text: 查看 GitHub
       link: https://github.com/YIMAI-AI-Doc/PharmaReg-Global
-
 features:
   - title: 🇨🇳 NMPA
     details: 中国国家药品监督管理局（National Medical Products Administration）。
@@ -33,15 +31,12 @@ features:
     link: /zh/pmda/
     linkText: 查看
 ---
-
 <div class="hotdocs-title">实时热搜文档</div>
-
 <div class="hotdocs">
   <div class="hotdocs-head">
     <div class="hotdocs-kicker">🔥 最近 7 天热门文档</div>
     <div class="hotdocs-badge">Top 10</div>
   </div>
-
   <div class="hotdocs-grid">
     <a class="hotdocs-item" href="/zh/guide/ectd-intro">
       <span class="hotdocs-rank">1</span>
@@ -85,9 +80,7 @@ features:
     </a>
   </div>
 </div>
-
 <div class="hotdocs-title">💬 医药法规智能问答</div>
-
 <div id="pharma-ai-container" style="margin: 20px 0; padding: 16px; border: 1px solid var(--vp-c-divider); border-radius: 16px; background: var(--vp-c-bg-soft);">
   <textarea
     id="question-input"
@@ -110,7 +103,6 @@ features:
     请输入问题并点击提交，我会为你解答全球药品注册法规相关问题。
   </div>
 </div>
-
 <style>
 .pharma-ai-spinner {
   width: 14px;
@@ -123,18 +115,16 @@ features:
   margin-right: 8px;
   animation: pharma-ai-spin 0.8s linear infinite;
 }
-
 @keyframes pharma-ai-spin {
   to { transform: rotate(360deg); }
 }
 </style>
-
 <script>
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
 (() => {
-  const AI_API_URL = 'https://pharma-reg-ai-5gqddef6cd04c140-1303835249.ap-shanghai.app.tcloudbase.com/pharma-ai'
-  const MARKED_SRC = 'https://cdn.jsdelivr.net/npm/marked/marked.min.js'
-  const IDLE_TEXT = '提交提问'
+  const AI_API_URL = 'https://pharma-reg-ai-5gqddef6cd04c140-1303835249.ap-shanghai.app.tcloudbase.com/pharma-ai';
+  const MARKED_SRC = 'https://cdn.jsdelivr.net/npm/marked/marked.min.js';
+  const IDLE_TEXT = '提交提问';
 
   function $(id) {
     return document.getElementById(id)
@@ -210,22 +200,18 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
         body: JSON.stringify({ question })
       })
 
-      // ✅ 核心修正1：先判断HTTP响应是否成功（response.ok 对应 statusCode 200）
       if (response.ok) {
         const data = await response.json().catch(() => null)
-        // ✅ 核心修正2：判断是否有answer字段，有则正常渲染，无则提示空回答
         if (data && data.answer) {
           renderMarkdown(data.answer)
         } else {
           output.textContent = '未获取到回答，请换个问题试试！'
         }
       } else {
-        // ✅ 核心修正3：HTTP状态码非200时，解析错误信息
         const errorData = await response.json().catch(() => null)
         output.textContent = `出错了：${errorData?.error ?? `请求失败（状态码：${response.status}）`}`
       }
     } catch (error) {
-      // ✅ 核心修正4：仅网络错误时提示
       console.error('请求失败：', error)
       output.textContent = '网络错误，请检查网络或稍后再试！'
     } finally {
