@@ -31,12 +31,15 @@ features:
     link: /zh/pmda/
     linkText: 查看
 ---
+
 <div class="hotdocs-title">实时热搜文档</div>
+
 <div class="hotdocs">
   <div class="hotdocs-head">
     <div class="hotdocs-kicker">🔥 最近 7 天热门文档</div>
     <div class="hotdocs-badge">Top 10</div>
   </div>
+
   <div class="hotdocs-grid">
     <a class="hotdocs-item" href="/zh/guide/ectd-intro">
       <span class="hotdocs-rank">1</span>
@@ -80,7 +83,9 @@ features:
     </a>
   </div>
 </div>
+
 <div class="hotdocs-title">💬 医药法规智能问答</div>
+
 <div id="pharma-ai-container" style="margin: 20px 0; padding: 16px; border: 1px solid var(--vp-c-divider); border-radius: 16px; background: var(--vp-c-bg-soft);">
   <textarea
     id="question-input"
@@ -103,6 +108,7 @@ features:
     请输入问题并点击提交，我会为你解答全球药品注册法规相关问题。
   </div>
 </div>
+
 <style>
 .pharma-ai-spinner {
   width: 14px;
@@ -119,6 +125,7 @@ features:
   to { transform: rotate(360deg); }
 }
 </style>
+
 <script>
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
 (() => {
@@ -168,7 +175,7 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
 
     if (isLoading) {
       button.disabled = true
-      button.innerHTML = `<span class="pharma-ai-spinner"></span>正在思考...`
+      button.innerHTML = '<span class="pharma-ai-spinner"></span>正在思考...'
       output.textContent = '正在检索专业知识库并生成回答，请稍候...'
     } else {
       button.disabled = false
